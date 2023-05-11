@@ -150,8 +150,8 @@ the note object
 | id | string | id of note |
 | title | string | note title |
 | description | string | note description |
-| updateAt | DateTime | latest updated time |
-| createAt | DateTime | create Time |
+| updatedAt | DateTime | latest updated time |
+| createdAt | DateTime | create Time |
 | createdBy | User | note creator |
 
 Example
@@ -161,8 +161,8 @@ Example
         "id" : "1",
         "title" : "Note1",
         "description" : "today is a good day",
-        "updateAt" : "20/3/2023",
-        "createAt" : "20/3/2023",
+        "updatedAt" : "2023-04-25T14:58:58.264Z",
+        "createdAt" : "2023-04-25T14:58:58.264Z",
         createdBy : {
             "email":"tine@thistine.com",
             "username":"thistine",
@@ -203,8 +203,8 @@ Response
 | id | string | id of note |
 | title | string | note title |
 | description | string | note description |
-| updateAt | DateTime | latest updated time |
-| createAt | DateTime | create Time |
+| updatedAt | DateTime | latest updated time |
+| createdAt | DateTime | create Time |
 | createdBy | User | note creator |
 
 Example
@@ -213,8 +213,8 @@ Example
         "id" : "1",
         "title" : "Note1",
         "description" : "today is a good day",
-        "updateAt" : "20/3/2023",
-        "createAt" : "20/3/2023",
+        "updatedAt" : "2023-04-25T14:58:58.264Z",
+        "createdAt" : "2023-04-25T14:58:58.264Z",
         createdBy : {
             "email":"tine@thistine.com",
             "username":"thistine",
@@ -249,8 +249,8 @@ Response
 | id | string | id of note |
 | title | string | note title |
 | description | string | note description |
-| updateAt | DateTime | latest updated time |
-| createAt | DateTime | create Time |
+| updatedAt | DateTime | latest updated time |
+| createdAt | DateTime | create Time |
 | createdBy | User | note creator |
 
 Example
@@ -259,8 +259,8 @@ Example
         "id" : "1",
         "title" : "Note1",
         "description" : "today is a good day",
-        "updateAt" : "20/3/2023",
-        "createAt" : "20/3/2023",
+        "updatedAt" : "2023-04-25T14:58:58.264Z",
+        "createdAt" : "2023-04-25T14:58:58.264Z",
         createdBy : {
             "email":"tine@thistine.com",
             "username":"thistine",
@@ -297,8 +297,8 @@ Response
 | id | string | id of note |
 | title | string | note title |
 | description | string | note description |
-| updateAt | DateTime | latest updated time |
-| createAt | DateTime | create Time |
+| updatedAt | DateTime | latest updated time |
+| createdAt | DateTime | create Time |
 | createdBy | User | note creator |
 
 Example
@@ -307,8 +307,8 @@ Example
         "id" : "1",
         "title" : "Note1",
         "description" : "today is a good day",
-        "updateAt" : "20/3/2023",
-        "createAt" : "20/3/2023",
+        "updatedAt" : "2023-04-25T14:58:58.264Z",
+        "createdAt" : "2023-04-25T14:58:58.264Z",
         createdBy : {
             "email":"tine@thistine.com",
             "username":"thistine",
@@ -366,7 +366,7 @@ the comment object
 | id | string | id of note |
 | text | string | note title |
 | description | string | note description |
-| createAt | DateTime | create Time |
+| createdAt | DateTime | create Time |
 | createdBy | User | note creator |
 
 Example
@@ -376,7 +376,7 @@ Example
         "id" : "1",
         "text" : "comment",
         "description" : "today is a good day",
-        "createAt" : "20/3/2023",
+        "createdAt" : "2023-04-25T14:58:58.264Z",
         createdBy : {
             "email":"tine@thistine.com",
             "username":"thistine",
@@ -409,7 +409,7 @@ Response
 | id | string | id of note |
 | text | string | note title |
 | description | string | note description |
-| createAt | DateTime | create Time |
+| createdAt | DateTime | create Time |
 | createdBy | User | note creator |
 
 Example
@@ -418,7 +418,7 @@ Example
         "id" : "1",
         "text" : "comment",
         "description" : "today is a good day",
-        "createAt" : "20/3/2023",
+        "createdAt" : "2023-04-25T14:58:58.264Z",
         createdBy : {
             "email":"tine@thistine.com",
             "username":"thistine",
