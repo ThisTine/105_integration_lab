@@ -1,18 +1,25 @@
 import { Box, Link, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
-const LoginForm = ({ handleClose = () => {}, setIsLogin = () => {}, setStatus = () => {}, setUser = () => {} }) => {
+const LoginForm = ({ handleClose = () => {}, setIsLogin = () => {} }) => {
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [usernameOrEmailError, setUsernameOrEmailError] = useState('');
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-  const handleSubmit = async () => {
-    // TODO: Implement login
-    // 1. validate form
-    // 2. call API to login
-    // 3. if success, close modal, and update user information.
-    // 4. if fail, show error message, and reset text fields value
+  const handleSubmit = () => {};
+
+  const validateForm = () => {
+    let isValid = true;
+    if (!usernameOrEmail) {
+      setUsernameOrEmailError('Username or email is required');
+      isValid = false;
+    }
+    if (!password) {
+      setPasswordError('Password is required');
+      isValid = false;
+    }
+    return isValid;
   };
   return (
     <Box

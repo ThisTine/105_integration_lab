@@ -1,98 +1,36 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { Stack, Container, Typography, Grid } from '@mui/material';
 import CustomButton from '../../share/components/CustomButton';
 import NoteCard from './components/NoteCard';
-import NoteDetailModal from './components/NoteDetailModal';
 import NoteCreateModal from './components/NoteCreateModal';
-import NoteEditModal from './components/NoteEditModal';
-import GlobalContext from '../../share/Context/GlobalContext';
-import Cookies from 'js-cookie';
 import Axios from '../../share/AxiosInstance';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
-const Home = () => {
-  const { user, setStatus } = useContext(GlobalContext);
-
+const Home = ({ user = {}, setStatus = () => {} }) => {
   const [openCreate, setOpenCreate] = useState(false);
-  const [openEdit, setOpenEdit] = useState(false);
-  const [openDetail, setOpenDetail] = useState(false);
-  const [targetNote, setTargetNote] = useState({});
   const [notes, setNotes] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // TODO: Implement get notes by user's token
-    // 1. check if user is logged in
     const userToken = Cookies.get('UserToken');
     if (userToken !== undefined && userToken !== 'undefined') {
-      // 2. call API to get notes
       Axios.get('/notes', { headers: { Authorization: `Bearer ${userToken}` } }).then((res) => {
-        // 3. set notes to state
         setNotes(res.data.data);
       });
     }
-  }, [user]);
+  }, []);
 
-  // Note Create Modal
   const handleNoteCreateOpen = () => {
-    if (!user) {
-      setStatus({
-        msg: 'You must login to create note',
-        severity: 'error',
-      });
-    } else {
-      setOpenCreate(true);
-    }
-
-    setTimeout(() => setStatus(), 1000);
+    // TODO: check if user is logged in before open modal
   };
+
   const handleNoteCreateClose = () => {
     setOpenCreate(false);
-  };image.png
-
-  // Note Edit Modal
-  const handleNoteEditOpen = () => {
-    setOpenEdit(true);
-  };
-  const handleNoteEditClose = () => {
-    setOpenEdit(false);
-  };
-
-  // Note Detail Modal
-  const handleNoteDetailOpen = () => {
-    setOpenDetail(true);
-  };
-  const handleNoteDetailClose = () => {
-    setOpenDetail(false);
-  };
-
-  const handleTargetNoteChange = (note) => {
-    setTargetNote(note);
-    handleNoteDetailOpen();
-  };
-
-  // Edit Note
-  const handleEdit = () => {
-    handleNoteDetailClose();
-    handleNoteEditOpen();
-  };
-
-  // Delete Note
-  const handleDelete = async () => {
-    // TODO: Implement delete note
-    // 1. call API to delete note
-    // 2. if successful, set status and remove note from state
-    // 3. if delete note failed, check if error is from calling API or not
   };
 
   return (
     <Container maxWidth="md">
-      <NoteDetailModal
-        note={targetNote}
-        open={openDetail}
-        handleClose={handleNoteDetailClose}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-      />
-      <NoteEditModal note={targetNote} open={openEdit} handleClose={handleNoteEditClose} setNotes={setNotes} />
       <NoteCreateModal open={openCreate} handleClose={handleNoteCreateClose} setNotes={setNotes} />
       <Stack direction="row" justifyContent="space-between" alignItems="center" marginBottom={4}>
         <Typography fontSize={30}>Your notes</Typography>
@@ -108,7 +46,7 @@ const Home = () => {
           <Grid container spacing={2}>
             {notes.map((note, index) => (
               <Grid item xs={4} key={index}>
-                <NoteCard title={note.title} date={note.updatedAt} handleClick={() => handleTargetNoteChange(note)} />
+                <NoteCard title={note.title} date={note.updatedAt} handleClick={() => navigate(`/note/${note.id}`)} />
               </Grid>
             ))}
           </Grid>

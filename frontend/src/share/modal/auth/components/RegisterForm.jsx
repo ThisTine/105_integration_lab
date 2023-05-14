@@ -1,7 +1,7 @@
 import { Box, Link, TextField, Typography } from '@mui/material';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 
-const RegisterForm = ({ setIsLogin = () => {}, setStatus = () => {} }) => {
+const RegisterForm = ({ setIsLogin = () => {} }) => {
   const [username, setUsername] = useState('');
   const [usernameError, setUsernameError] = useState('');
   const [email, setEmail] = useState('');
@@ -11,12 +11,40 @@ const RegisterForm = ({ setIsLogin = () => {}, setStatus = () => {} }) => {
   const [rePassword, setRePassword] = useState('');
   const [rePasswordError, setRePasswordError] = useState('');
 
-  const handleSubmit = async () => {
-    // TODO: Implement login
-    // 1. validate form
-    // 2. send request to server
-    // 3. if successful, change modal to login mode
-    // 4. if fail, show error message alert, and reset password fields
+  const handleSubmit = () => {};
+
+  const validateForm = () => {
+    let isValid = true;
+    // check user
+    if (!username) {
+      setUsernameError('Username is required');
+      isValid = false;
+    }
+    // check email
+    if (!email) {
+      setEmailError('Email is required');
+      isValid = false;
+    }
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email)) {
+      setEmailError('Invalid email format');
+      isValid = false;
+    }
+    // check password
+    if (!password) {
+      setPasswordError('Password is required');
+      isValid = false;
+    }
+    if (!rePassword) {
+      setRePasswordError('Confirm password is required');
+    }
+    if (password !== rePassword) {
+      setPasswordError('Password is not match');
+      setRePassword('');
+      setPassword('');
+      isValid = false;
+    }
+
+    return isValid;
   };
   return (
     <Box

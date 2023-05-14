@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 
-const AuthModal = ({ open = false, handleClose = () => {}, setStatus = () => {}, setUser = () => {} }) => {
+const AuthModal = ({ open = false, handleClose = () => {} }) => {
   const [isLogin, setIsLogin] = useState(true);
   return (
     <Modal open={open} onClose={handleClose}>
@@ -29,8 +29,8 @@ const AuthModal = ({ open = false, handleClose = () => {}, setStatus = () => {},
             translate: isLogin ? '0%' : '-50%',
           }}
         >
-          <LoginForm handleClose={handleClose} setIsLogin={setIsLogin} setStatus={setStatus} setUser={setUser} />
-          <RegisterForm setIsLogin={setIsLogin} setStatus={setStatus} />
+          <LoginForm handleClose={handleClose} setIsLogin={setIsLogin} />
+          <RegisterForm setIsLogin={setIsLogin} />
         </Box>
       </Card>
     </Modal>

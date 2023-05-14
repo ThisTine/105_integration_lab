@@ -1,23 +1,37 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } from '@mui/material';
+import Axios from '../../../share/AxiosInstance';
 import Cookies from 'js-cookie';
 import { AxiosError } from 'axios';
-import GlobalContext from '../../../share/Context/GlobalContext';
 
-const NoteCreateModal = ({ open = false, handleClose = () => {}, setNotes = () => {} }) => {
+const NoteCreateModal = ({ open = false, handleClose = () => {}, setNotes = () => {}, setStatus = () => {} }) => {
   const [newNote, setNewNote] = useState({
     title: '',
     description: '',
   });
   const [error, setError] = useState({});
-  const { setStatus } = useContext(GlobalContext);
 
   const submit = async () => {
-    // TODO: Implement create note
-    // 1. validate form
-    // 2. call API to create note
-    // 3. if successful, add new note to state and close modal
-    // 4. if create note failed, check if error is from calling API or not
+    if (!validateForm()) return;
+
+    try {
+      const userToken = Cookies.get('UserToken');
+      const response = await Axios.post('/note', newNote, {
+        headers: { Authorization: `Bearer ${userToken}` },
+      });
+
+      if (response.data.success) {
+        // TODO: show status of success here
+        setNotes((prev) => [...prev, response.data.data]);
+        resetAndClose();
+      }
+    } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        // TODO: show status of error from AxiosError here
+      } else {
+        // TODO: show status of other errors here
+      }
+    }
   };
 
   const resetAndClose = () => {
@@ -36,6 +50,16 @@ const NoteCreateModal = ({ open = false, handleClose = () => {}, setNotes = () =
       ...newNote,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const validateForm = () => {
+    const error = {};
+    if (!newNote.title) error.title = 'Title is required';
+    if (!newNote.description) error.description = 'Description is required';
+    setError(error);
+
+    if (Object.keys(error).length) return false;
+    return true;
   };
 
   return (

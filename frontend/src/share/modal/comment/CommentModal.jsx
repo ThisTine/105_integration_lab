@@ -1,7 +1,6 @@
 import { Box, Button, Card, Modal, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useKeyDown } from '../../../hooks/useKeyDown';
-import CommentCard from './components/CommentCard';
 
 const CommentModal = ({ open = false, handleClose = () => {} }) => {
   const [textField, setTextField] = useState('');
@@ -13,9 +12,7 @@ const CommentModal = ({ open = false, handleClose = () => {} }) => {
 
   const handleAddComment = () => {
     // TODO implement logic
-    setComments([...comments, { id: Math.random(), msg: textField }]);
   };
-
   return (
     <Modal open={open} onClose={handleClose}>
       <Card
@@ -46,21 +43,11 @@ const CommentModal = ({ open = false, handleClose = () => {} }) => {
           />
           <Button onClick={handleAddComment}>Submit</Button>
         </Box>
-        <Box
-          sx={{
-            overflowY: 'scroll',
-            maxHeight: 'calc(400px - 2rem)',
-            '&::-webkit-scrollbar': {
-              width: '.5rem', // chromium and safari
-            },
-            '&::-webkit-scrollbar-thumb': {
-              background: '#999999',
-              borderRadius: '10px',
-            },
-          }}
-        >
+        <Box sx={{ overflowY: 'scroll', maxHeight: 'calc(400px - 2rem)' }}>
           {comments.map((comment) => (
-            <CommentCard comment={comment} key={comment.id} />
+            <Card key={comment.id} sx={{ p: '1rem', m: '0.5rem' }}>
+              {comment.msg}
+            </Card>
           ))}
         </Box>
       </Card>
